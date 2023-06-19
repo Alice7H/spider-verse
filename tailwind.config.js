@@ -6,13 +6,23 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
+    backgroundImage: {
+      'hero-pattern': 'linear-gradient(#0069e3,#0056ba)'
     },
+    extend: {
+      'maxWidth': {
+        'hero': '1920px',
+      },
+      height: {
+        'spider-man-616-height': '360px',
+        'spider-woman-65-height': '300px',
+        'spider-man-1610-height': '324px',
+        'spider-man-dr-14512-height': '324px',
+        'spider-man-8311-height': '146px',
+        'spider-man-90214-height': '376px',
+        'spider-man-928-height': '360px',
+      }
+    }
   },
   plugins: [],
 }
