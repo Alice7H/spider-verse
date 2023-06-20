@@ -22,7 +22,8 @@ export default function RootLayout({children}: { children: React.ReactNode}) {
           flex
           items-center
           justify-between
-          m-[3rem]
+          m-4 mb-0
+          hero-screen:m-[3rem] hero-screen::mb-0
           relative
           z-10
         ">
