@@ -85,6 +85,19 @@ export default function Carousel({heroes, activeId}: IProp){
     handleChangeActiveIndex(newPosition);
   }
 
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    setStartInteractionPosition(event.touches[0].clientX);
+  }
+
+  const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    if(!startInteractionPosition) return null;
+
+    const endInteractionPosition = event.changedTouches[0].clientX;
+    const diffPosition = endInteractionPosition - startInteractionPosition;
+    const newPosition = diffPosition > 0 ? -1 : 1;
+    handleChangeActiveIndex(newPosition);
+  }
+
   if(!visibleItems) {return null;}
 
   return(
@@ -94,6 +107,8 @@ export default function Carousel({heroes, activeId}: IProp){
           className="cursor-grab h-[130vh] relative active:cursor-grabbing"
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           <AnimatePresence mode="popLayout">
             {visibleItems?.map((item, position) => (
