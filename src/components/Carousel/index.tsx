@@ -20,6 +20,7 @@ enum enPosition {
 export default function Carousel({heroes, activeId}: IProp){
   const [visibleItems, setVisibleItems] = useState<IHeroData[]| null>(null);
   const [activeIndex, setActiveIndex] = useState(heroes.findIndex((hero) => hero.id === activeId) - 1);
+  const [startInteractionPosition, setStartInteractionPosition] = useState<number>(0);
 
   const transitionAudio = useMemo(()=> new Audio("/songs/transition.mp3"),[]);
   const voicesAudio: Record<string, HTMLAudioElement> = useMemo(()=> ({
@@ -71,6 +72,19 @@ export default function Carousel({heroes, activeId}: IProp){
     setActiveIndex((prevActiveIndex) => prevActiveIndex + newDirection);
   }
 
+  const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
+    setStartInteractionPosition(event.clientX);
+  }
+
+  const handleDragEnd = (event: React.DragEvent<HTMLDivElement>) => {
+    if(!startInteractionPosition) return null;
+
+    const endInterationPosition =event.clientX;
+    const diffPosition = endInterationPosition - startInteractionPosition;
+    const newPosition = diffPosition > 0 ? -1 : 1;
+    handleChangeActiveIndex(newPosition);
+  }
+
   if(!visibleItems) {return null;}
 
   return(
@@ -78,7 +92,8 @@ export default function Carousel({heroes, activeId}: IProp){
       <div className="flex-1 w-full left-[-15%] relative">
         <div
           className="cursor-grab h-[130vh] relative active:cursor-grabbing"
-          onClick={() => handleChangeActiveIndex(1)}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
         >
           <AnimatePresence mode="popLayout">
             {visibleItems?.map((item, position) => (
