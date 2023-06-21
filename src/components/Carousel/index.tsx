@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState} from "react";
+import { useEffect, useMemo, useState} from "react";
 import { IHeroData } from "@/interfaces/heroes";
 import HeroDetails from "../HeroDetails";
 import HeroPicture from "../HeroPicture";
@@ -20,6 +20,28 @@ enum enPosition {
 export default function Carousel({heroes, activeId}: IProp){
   const [visibleItems, setVisibleItems] = useState<IHeroData[]| null>(null);
   const [activeIndex, setActiveIndex] = useState(heroes.findIndex((hero) => hero.id === activeId) - 1);
+
+  const transitionAudio = useMemo(()=> new Audio("/songs/transition.mp3"),[]);
+  const voicesAudio: Record<string, HTMLAudioElement> = useMemo(()=> ({
+    "spider-man-616": new Audio("/songs/spider-man-616.mp3"),
+    "spider-woman-65": new Audio("/songs/mulher-aranha-65.mp3"),
+    "spider-man-1610": new Audio("/songs/spider-man-1610.mp3"),
+    "sp-dr-14512": new Audio("/songs/sp-dr-14512.mp3"),
+    "spider-ham-8311": new Audio("/songs/spider-ham-8311.mp3"),
+    "spider-man-90214": new Audio("/songs/spider-man-90214.mp3"),
+    "spider-man-928": new Audio("/songs/spider-man-928.mp3"),
+  }),[])
+
+  useEffect(()=>{
+    if(!visibleItems) return;
+
+    transitionAudio.play();
+    const voiceAudio = voicesAudio[visibleItems[1].id];
+    if(voiceAudio) {
+      voiceAudio.volume = 0.3;
+      voiceAudio.play();
+    }
+  },[visibleItems, transitionAudio, voicesAudio])
 
   useEffect(()=> {
     const items = [...heroes];
