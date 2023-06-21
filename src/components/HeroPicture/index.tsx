@@ -20,17 +20,19 @@ const heroesImage: Record<string, StaticImageData> = {
 
 interface IProps {
   hero: IHeroData;
+  hasNewPosition?: boolean;
 }
 
-export default function HeroPicture ({hero}: IProps) {
+export default function HeroPicture ({hero, hasNewPosition: hasPosition = false}: IProps) {
   return(
     <Image
-      className="
+      className={`
         h-full
         w-full
         object-contain
         object-bottom
-      "
+        ${hasPosition && 'object-[center_right]' }
+      `}
       src={heroesImage[hero.id] || ImageSpiderMan616}
       alt={ `${hero.name} (Universo-${hero.universe})` || ""}
       priority
