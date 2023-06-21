@@ -12,7 +12,7 @@
   background-size: cover;
 }
 
-:root::before {
+:root:not(.hero-page)::before {
   content: "";
   background: linear-gradient(#0069e3, #0056ba);
   height: 100%;

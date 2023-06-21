@@ -19,7 +19,7 @@ enum enPosition {
 
 export default function Carousel({heroes, activeId}: IProp){
   const [visibleItems, setVisibleItems] = useState<IHeroData[]| null>(null);
-  const [activeIndex, setActiveIndex] = useState(heroes.findIndex((hero) => hero.id === activeId));
+  const [activeIndex, setActiveIndex] = useState(heroes.findIndex((hero) => hero.id === activeId) - 1);
 
   useEffect(()=> {
     const items = [...heroes];
@@ -28,6 +28,22 @@ export default function Carousel({heroes, activeId}: IProp){
 
     setVisibleItems(visibleItems);
   },[heroes, activeIndex]);
+
+  useEffect(()=>{
+    const htmlEl = document.querySelector("html");
+    if(!htmlEl || !visibleItems){
+      return;
+    }
+
+    const currentHeroId = visibleItems[1].id;
+    htmlEl.style.backgroundImage = `url("/spiders/${currentHeroId}-background.png")`;
+    htmlEl.classList.add("hero-page");
+
+    return () => {
+      htmlEl.classList.remove("hero-page");
+    }
+
+  },[visibleItems])
 
   const handleChangeActiveIndex = (newDirection: number) => {
     setActiveIndex((prevActiveIndex) => prevActiveIndex + newDirection);
@@ -66,9 +82,14 @@ export default function Carousel({heroes, activeId}: IProp){
           </AnimatePresence>
         </div>
       </div>
-      <div className="mt-12 relative flex-1">
+      <motion.div
+        className="mt-12 relative flex-1"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 2 }}
+      >
         <HeroDetails data={heroes[0]} />
-      </div>
+      </motion.div>
     </div>
   )
 }
