@@ -15,11 +15,11 @@ module.exports = {
       },
       objectPosition: {
         'center-right': 'center right',
+      },
+      screens: {
+        'hero-screen': '1920px'
       }
     },
-    screens: {
-      'hero-screen': '1920px'
-    }
   },
   plugins: [],
 }

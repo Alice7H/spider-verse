@@ -12,13 +12,13 @@ interface IProps {
 
 export default function HeroesList({heroes}: IProps){
   const heroesVariantHeight: {[x: string]: string} = {
-    'spider-man-616': 'h-[360px]',
+    'spider-man-616':  'h-[360px]',
     'spider-woman-65': 'h-[300px]',
     'spider-man-1610': 'h-[324px]',
-    'sp-dr-14512': 'h-[324px]',
+    'sp-dr-14512':     'h-[324px]',
     'spider-ham-8311': 'h-[146px]',
-    'spider-man-90214': 'h-[376px]',
-    'spider-man-928': 'h-[360px]',
+    'spider-man-90214':'h-[376px]',
+    'spider-man-928':  'h-[360px]',
   }
 
   return (
@@ -38,7 +38,8 @@ export default function HeroesList({heroes}: IProps){
         flex justify-between items-end
         max-w-[1920px-700px]
         absolute
-        top-[40%]
+        top-[30%]
+        md:top-[40%]
         w-full
         hero-screen:max-w-[calc(1920px-400px)]
         hero-screen:top-1/2

@@ -13,7 +13,8 @@ export default function RootLayout({children}: { children: React.ReactNode}) {
       <body className="
         text-white
         max-w-hero
-        overflow-hidden
+        overflow-scroll
+        lg:overflow-hidden
         relative
         m-auto
         h-[calc(100vh-3.5rem)]
@@ -23,9 +24,9 @@ export default function RootLayout({children}: { children: React.ReactNode}) {
           items-center
           justify-between
           m-4 mb-0
-          hero-screen:m-[3rem] hero-screen::mb-0
+          hero-screen:m-[3rem] hero-screen:mb-0
           relative
-          z-10
+          z-[4]
         ">
           <Image
             src="/icons/menu.svg"
@@ -41,6 +42,7 @@ export default function RootLayout({children}: { children: React.ReactNode}) {
               width={260}
               height={70}
               priority
+              className="w-[130px] md:w-[260px]"
             />
           </Link>
           <Image

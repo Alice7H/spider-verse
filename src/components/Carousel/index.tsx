@@ -101,10 +101,27 @@ export default function Carousel({heroes, activeId}: IProp){
   if(!visibleItems) {return null;}
 
   return(
-    <div className="flex">
-      <div className="flex-1 w-full left-[-15%] relative">
+    <div className="flex flex-col md:flex-row mt-12 md:mt-0">
+      <div className="
+        position
+        flex-1
+        w-full
+        max-sm:left-[calc(50vw-315px)]
+        md:max-lg:left-[-35%]
+        lg:left-[-15%]
+        hero-screen:left-0
+        relative
+        "
+      >
         <div
-          className="cursor-grab h-[130vh] relative active:cursor-grabbing"
+          className="
+            cursor-grab
+            h-[300px]
+            md:h-[100vh]
+            lg:h-[130vh]
+            relative
+            active:cursor-grabbing
+          "
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
           onTouchStart={handleTouchStart}
@@ -114,7 +131,7 @@ export default function Carousel({heroes, activeId}: IProp){
             {visibleItems?.map((item, position) => (
               <motion.div
                 key={item.id}
-                className="h-full left-0 absolute w-[500px]"
+                className="elements h-full left-0 absolute w-[280px] md:w-[500px]"
                 transition={{ duration: 0.8 }}
                 initial={{
                   x: -1500,
@@ -135,7 +152,7 @@ export default function Carousel({heroes, activeId}: IProp){
         </div>
       </div>
       <motion.div
-        className="mt-12 relative flex-1"
+        className="mt-0 lg:mt-12 relative flex-1 ml-8 md:ml-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 2 }}
