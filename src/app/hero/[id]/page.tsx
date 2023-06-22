@@ -8,7 +8,7 @@ interface IProps {
 }
 
 async function getData(): Promise<{ data: IHeroData[] }> {
-  const res = await fetch("http://localhost:3000/api/heroes");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/heroes`);
 
   if (!res.ok) {
     throw new Error("Falha ao buscar heróis");
