@@ -1,5 +1,5 @@
 import { IHeroData } from "@/interfaces/heroes";
-import { Quicksand} from "next/font/google";
+import { Quicksand } from "next/font/google";
 import { spidermanFont } from "@/fonts";
 import Image from "next/image";
 
@@ -55,6 +55,7 @@ export default function HeroDetails({data}: IProps) {
           alt={`Primeira aparição nos quadrinhos de ${name}`}
           width={80}
           height={122}
+          className="w-auto h-auto"
         />
       </div>
     </div>
