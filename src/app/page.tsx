@@ -1,7 +1,6 @@
 import HeroesList from "@/components/HeroesList"
 import { IHeroData } from "@/interfaces/heroes"
 
-
 async function getData(): Promise<{ data: IHeroData[] }> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_VERCEL_URL}/api/heroes`);
 
