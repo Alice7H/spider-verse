@@ -1,12 +1,13 @@
 import { IHeroData } from "@/interfaces/heroes";
 import { Quicksand } from "next/font/google";
-import { spidermanFont } from "@/fonts";
+import localFont from 'next/font/local'
 import Image from "next/image";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
 })
+const spidermanFont = localFont({ src: '../../fonts/spider-man.otf' })
 
 interface IProps {
   data: IHeroData;
@@ -15,7 +16,7 @@ interface IProps {
 export default function HeroDetails({data}: IProps) {
   const {id, name, universe, details} = data;
   return(
-    <div className="quicksand.className">
+    <div className={quicksand.className}>
       <h1 className={`text-[3.5rem] m-0 ${spidermanFont.className}`}>{name} (Universo-{universe})</h1>
       <div className="border-t border-solid border-white border-opacity-50
         my-4 mx-0 py-4 px-0 w-[70%]
